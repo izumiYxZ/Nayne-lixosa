@@ -17,7 +17,7 @@
       overflow: hidden;
     }
 
-    /* ================= TELA INICIAL ================= */
+    /* ===== TELA INICIAL ===== */
     .inicio {
       position: absolute;
       display: flex;
@@ -53,7 +53,6 @@
       border-radius: 20px;
       font-size: 16px;
       position: relative;
-      text-align: center;
       animation: aparecer 0.5s ease-out;
       box-shadow: 0 0 15px rgba(124, 58, 237, 0.6);
     }
@@ -75,11 +74,10 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* ================= CARTA ================= */
+    /* ===== CARTA ===== */
     .cartaContainer {
       position: absolute;
       width: 300px;
-      height: 200px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 1s;
@@ -92,11 +90,10 @@
 
     .envelope {
       width: 100%;
-      height: 100%;
+      height: 180px;
       background: #5b21b6;
-      position: absolute;
-      bottom: 0;
       border-radius: 10px;
+      position: relative;
       overflow: hidden;
     }
 
@@ -117,52 +114,62 @@
       to { transform: rotateX(180deg); }
     }
 
+    /* CARTA REAL */
     .carta {
-      position: absolute;
       width: 90%;
-      height: 150px;
+      margin: auto;
       background: #ede9fe;
-      left: 5%;
-      bottom: 0;
       border-radius: 10px;
       padding: 15px;
       box-sizing: border-box;
-      transform: translateY(100%);
+      margin-top: -120px;
+
+      max-height: 0;
+      overflow: hidden;
     }
 
     .abrir .carta {
-      animation: subir 1s ease forwards;
+      animation: expandir 2s ease forwards;
       animation-delay: 1s;
     }
 
-    @keyframes subir {
-      to { transform: translateY(-40px); }
+    @keyframes expandir {
+      from { max-height: 0; }
+      to { max-height: 300px; }
     }
 
+    /* TEXTO */
     .texto {
       color: #4c1d95;
       font-size: 14px;
-      line-height: 1.5;
-      white-space: pre-line;
-      border-right: 2px solid #4c1d95;
-      overflow: hidden;
-      width: 0;
+      line-height: 1.6;
     }
 
-    .abrir .texto {
-      animation: escrever 4s steps(120) forwards;
-      animation-delay: 2s;
+    .linha {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: aparecerTexto 0.6s forwards;
     }
 
-    @keyframes escrever {
-      to { width: 100%; }
+    .linha:nth-child(1) { animation-delay: 2s; }
+    .linha:nth-child(2) { animation-delay: 3s; }
+    .linha:nth-child(3) { animation-delay: 4s; }
+    .linha:nth-child(4) { animation-delay: 5s; }
+    .linha:nth-child(5) { animation-delay: 6s; }
+    .linha:nth-child(6) { animation-delay: 7s; }
+
+    @keyframes aparecerTexto {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
   </style>
 </head>
 <body>
 
-  <!-- TELA INICIAL -->
+  <!-- INICIO -->
   <div class="inicio" onclick="abrirCarta()">
     <div class="fala">clica aqui sua sebosa 🙄</div>
     <img src="axolote.png" alt="Axolote">
@@ -176,15 +183,12 @@
 
     <div class="carta">
       <div class="texto">
-Feliz aniversário 💜
-
-Eu fiz esse site só pra você 😏
-Espero que você goste, mesmo sendo simples
-
-Você é muito especial pra mim
-e eu queria fazer algo diferente
-
-(apenas o começo…)
+        <div class="linha">Feliz aniversário 💜</div>
+        <div class="linha">Eu fiz esse site só pra você 😏</div>
+        <div class="linha">Espero que você goste, mesmo sendo simples</div>
+        <div class="linha">Você é muito especial pra mim</div>
+        <div class="linha">e eu queria fazer algo diferente</div>
+        <div class="linha">(apenas o começo…)</div>
       </div>
     </div>
   </div>
