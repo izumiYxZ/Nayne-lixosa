@@ -28,33 +28,44 @@
       transform: scale(1.05);
     }
 
+    /* animação do axolote */
+    @keyframes balancar {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(-5deg); }
+      100% { transform: rotate(0deg); }
+    }
+
     img {
       width: 120px;
       max-width: 80%;
       height: auto;
-      margin-bottom: 12px;
+      animation: balancar 2s infinite ease-in-out;
     }
 
+    /* balão de fala */
     .fala {
+      margin-bottom: 10px;
       background: #fda4af;
       color: #1e293b;
-      padding: 8px 12px;
+      padding: 10px 15px;
       border-radius: 20px;
       font-size: 16px;
-      position: relative;
       text-align: center;
       max-width: 220px;
+      position: relative;
     }
 
     .fala::after {
       content: "";
       position: absolute;
-      top: -10px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
       border-width: 10px;
       border-style: solid;
-      border-color: transparent transparent #fda4af transparent;
+      border-color: #fda4af transparent transparent transparent;
     }
   </style>
 
@@ -62,10 +73,10 @@
 <body>
 
   <div class="container" onclick="entrar()">
-    
-    <img src="axolote.png">
-    
+
     <div class="fala">clica aqui sua sebosa 🙄</div>
+
+    <img src="axolote.png" alt="Axolote">
 
   </div>
 
@@ -75,7 +86,6 @@
       document.body.style.opacity = "0";
 
       setTimeout(() => {
-        // depois você pode trocar pra carta.html
         alert("Aqui vai abrir a carta 😏");
       }, 800);
     }
