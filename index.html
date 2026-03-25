@@ -78,6 +78,7 @@
     .cartaContainer {
       position: absolute;
       width: 300px;
+      height: 220px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 1s;
@@ -88,15 +89,23 @@
       pointer-events: all;
     }
 
+    /* envelope */
     .envelope {
       width: 100%;
-      height: 180px;
+      height: 100%;
       background: #5b21b6;
       border-radius: 10px;
-      position: relative;
-      overflow: hidden;
+      position: absolute;
+      bottom: 0;
+      z-index: 1;
+      transition: opacity 0.5s ease;
     }
 
+    .envelope.sumir {
+      opacity: 0;
+    }
+
+    /* tampa */
     .tampa {
       position: absolute;
       width: 100%;
@@ -104,41 +113,45 @@
       background: #7c3aed;
       clip-path: polygon(0 0, 50% 50%, 100% 0);
       transform-origin: top;
+      z-index: 2;
     }
 
     .abrir .tampa {
-      animation: abrir 1s ease forwards;
+      animation: abrir 0.8s ease forwards;
     }
 
     @keyframes abrir {
-      to { transform: rotateX(180deg); }
+      to {
+        transform: rotateX(180deg);
+      }
     }
 
-    /* CARTA REAL */
+    /* carta */
     .carta {
+      position: absolute;
       width: 90%;
-      margin: auto;
+      left: 5%;
+      bottom: 10px;
       background: #ede9fe;
       border-radius: 10px;
       padding: 15px;
       box-sizing: border-box;
-      margin-top: -120px;
-
-      max-height: 0;
-      overflow: hidden;
+      transform: translateY(100%);
+      z-index: 3;
     }
 
     .abrir .carta {
-      animation: expandir 2s ease forwards;
-      animation-delay: 1s;
+      animation: sair 1s ease forwards;
+      animation-delay: 0.8s;
     }
 
-    @keyframes expandir {
-      from { max-height: 0; }
-      to { max-height: 300px; }
+    @keyframes sair {
+      to {
+        transform: translateY(-120px);
+      }
     }
 
-    /* TEXTO */
+    /* texto */
     .texto {
       color: #4c1d95;
       font-size: 14px;
@@ -148,7 +161,7 @@
     .linha {
       opacity: 0;
       transform: translateY(10px);
-      animation: aparecerTexto 0.6s forwards;
+      animation: aparecerTexto 0.5s forwards;
     }
 
     .linha:nth-child(1) { animation-delay: 2s; }
@@ -177,7 +190,7 @@
 
   <!-- CARTA -->
   <div class="cartaContainer" id="carta">
-    <div class="envelope">
+    <div class="envelope" id="envelope">
       <div class="tampa"></div>
     </div>
 
@@ -202,6 +215,11 @@
         carta.classList.add("mostrar");
         carta.classList.add("abrir");
       }, 800);
+
+      // faz envelope sumir depois
+      setTimeout(() => {
+        document.getElementById("envelope").classList.add("sumir");
+      }, 2000);
     }
   </script>
 
