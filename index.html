@@ -16,7 +16,6 @@
       align-items: center;
     }
 
-    /* ===== INICIO ===== */
     .inicio {
       position: absolute;
       display: flex;
@@ -52,7 +51,6 @@
       box-shadow: 0 0 15px rgba(124,58,237,0.6);
     }
 
-    /* ===== CARTA ===== */
     .cartaContainer {
       position: absolute;
       width: 300px;
@@ -127,17 +125,21 @@
       50% { opacity: 0; }
     }
 
-    /* 🔥 BOTÃO INVISÍVEL */
+    /* 🔥 BOTÃO ESCONDIDO (FINAL) */
     .segredo {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      width: 40px;
-      height: 40px;
+      margin-top: 10px;
+      width: 100%;
+      height: 20px;
       cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.5s;
     }
 
-    /* 🔥 TELA SECRETA */
+    .segredo.mostrar {
+      opacity: 0.1; /* quase invisível */
+    }
+
+    /* TEXTO SECRETO */
     .secretoTexto {
       position: fixed;
       top: 50%;
@@ -162,13 +164,11 @@
 </head>
 <body>
 
-  <!-- INICIO -->
   <div class="inicio" onclick="abrirCarta()">
     <div class="fala">clica aqui sua sebosa 🙄</div>
     <img src="axolote.png">
   </div>
 
-  <!-- CARTA -->
   <div class="cartaContainer" id="carta">
     <div class="envelope" id="envelope">
       <div class="tampa"></div>
@@ -177,16 +177,15 @@
     <div class="carta">
       <div class="texto" id="texto"></div>
 
-      <!-- BOTÃO ESCONDIDO -->
-      <div class="segredo" onclick="mostrarSegredo()"></div>
+      <!-- BOTÃO FINAL -->
+      <div class="segredo" id="segredoBtn" onclick="mostrarSegredo()"></div>
     </div>
   </div>
 
-  <!-- TEXTO SECRETO -->
   <div class="secretoTexto" id="segredoTexto">
-    volta a flertar cmg ):
-    (finge q aqui tem a figurinha da formiguinha, deu preguiça de botar,
-    to a 4 horas fazendo isso)
+    volta a flertar cmg ):,juro q sou bonzinho
+    (finge q aqui tem a figurinha da formiguinha triste 
+    deu preguiça de botar, to a 4 horas fazendo isso)
   </div>
 
   <script>
@@ -234,6 +233,9 @@ E isso nay espero q vc aproveite de verdade seu dia, desculpa pelas coisas q aco
           setTimeout(digitar, 35);
         } else {
           el.innerHTML = texto;
+
+          // MOSTRA BOTÃO NO FINAL
+          document.getElementById("segredoBtn").classList.add("mostrar");
         }
       }
 
