@@ -89,7 +89,6 @@
       pointer-events: all;
     }
 
-    /* envelope */
     .envelope {
       width: 100%;
       height: 100%;
@@ -105,7 +104,6 @@
       opacity: 0;
     }
 
-    /* tampa */
     .tampa {
       position: absolute;
       width: 100%;
@@ -121,12 +119,9 @@
     }
 
     @keyframes abrir {
-      to {
-        transform: rotateX(180deg);
-      }
+      to { transform: rotateX(180deg); }
     }
 
-    /* carta */
     .carta {
       position: absolute;
       width: 90%;
@@ -146,36 +141,29 @@
     }
 
     @keyframes sair {
-      to {
-        transform: translateY(-120px);
-      }
+      to { transform: translateY(-120px); }
     }
 
-    /* texto */
+    /* TEXTO DIGITANDO */
     .texto {
       color: #4c1d95;
       font-size: 14px;
       line-height: 1.6;
+      white-space: pre-line;
     }
 
-    .linha {
-      opacity: 0;
-      transform: translateY(10px);
-      animation: aparecerTexto 0.5s forwards;
+    /* cursor piscando */
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      background: #4c1d95;
+      margin-left: 2px;
+      animation: piscar 1s infinite;
     }
 
-    .linha:nth-child(1) { animation-delay: 2s; }
-    .linha:nth-child(2) { animation-delay: 3s; }
-    .linha:nth-child(3) { animation-delay: 4s; }
-    .linha:nth-child(4) { animation-delay: 5s; }
-    .linha:nth-child(5) { animation-delay: 6s; }
-    .linha:nth-child(6) { animation-delay: 7s; }
-
-    @keyframes aparecerTexto {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes piscar {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
     }
 
   </style>
@@ -195,14 +183,7 @@
     </div>
 
     <div class="carta">
-      <div class="texto">
-        <div class="linha">Feliz aniversário 💜</div>
-        <div class="linha">Eu fiz esse site só pra você 😏</div>
-        <div class="linha">Espero que você goste, mesmo sendo simples</div>
-        <div class="linha">Você é muito especial pra mim</div>
-        <div class="linha">e eu queria fazer algo diferente</div>
-        <div class="linha">(apenas o começo…)</div>
-      </div>
+      <div class="texto" id="texto"></div>
     </div>
   </div>
 
@@ -214,12 +195,40 @@
         let carta = document.getElementById("carta");
         carta.classList.add("mostrar");
         carta.classList.add("abrir");
+
+        escreverTexto();
       }, 800);
 
-      // faz envelope sumir depois
       setTimeout(() => {
         document.getElementById("envelope").classList.add("sumir");
       }, 2000);
+    }
+
+    function escreverTexto() {
+      const texto = `Feliz aniversário 💜
+
+Eu fiz esse site só pra você 😏
+Espero que você goste, mesmo sendo simples
+
+Você é muito especial pra mim
+e eu queria fazer algo diferente
+
+(apenas o começo…)`;
+
+      const elemento = document.getElementById("texto");
+      let i = 0;
+
+      function digitar() {
+        if (i < texto.length) {
+          elemento.innerHTML = texto.substring(0, i + 1) + '<span class="cursor"></span>';
+          i++;
+          setTimeout(digitar, 35); // velocidade
+        } else {
+          elemento.innerHTML = texto; // remove cursor no final
+        }
+      }
+
+      digitar();
     }
   </script>
 
