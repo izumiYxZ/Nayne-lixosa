@@ -46,6 +46,7 @@
 
     /* balão de fala */
     .fala {
+  position: relative;
   margin-bottom: 10px;
   background: #9333ea;
   box-shadow: 0 0 15px rgba(147, 51, 234, 0.6); /* roxo bonito */
@@ -62,12 +63,14 @@
     .fala::after {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 10px;
+  border-width: 12px;
   border-style: solid;
   border-color: #7c3aed transparent transparent transparent;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
     }
     }
   </style>
