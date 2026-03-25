@@ -8,16 +8,15 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(135deg, #0f0a1a, #4c1d95);
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
     }
 
-    /* ===== TELA INICIAL ===== */
+    /* INICIO */
     .inicio {
       position: absolute;
       display: flex;
@@ -32,17 +31,15 @@
       pointer-events: none;
     }
 
-    @keyframes balancar {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(5deg); }
-      50% { transform: rotate(0deg); }
-      75% { transform: rotate(-5deg); }
-      100% { transform: rotate(0deg); }
-    }
-
     .inicio img {
       width: 120px;
       animation: balancar 2s infinite ease-in-out;
+    }
+
+    @keyframes balancar {
+      0%,100% { transform: rotate(0); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
     }
 
     .fala {
@@ -52,52 +49,29 @@
       padding: 10px 15px;
       border-radius: 20px;
       font-size: 16px;
-      position: relative;
-      animation: aparecer 0.5s ease-out;
-      box-shadow: 0 0 15px rgba(124, 58, 237, 0.6);
+      box-shadow: 0 0 15px rgba(124,58,237,0.6);
     }
 
-    .fala::after {
-      content: "";
-      position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 12px;
-      border-style: solid;
-      border-color: #7c3aed transparent transparent transparent;
-    }
-
-    @keyframes aparecer {
-      0% { transform: scale(0); opacity: 0; }
-      60% { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* ===== CARTA ===== */
+    /* CARTA */
     .cartaContainer {
       position: absolute;
       width: 300px;
-      height: 220px;
       opacity: 0;
-      pointer-events: none;
       transition: opacity 1s;
     }
 
     .cartaContainer.mostrar {
       opacity: 1;
-      pointer-events: all;
     }
 
     .envelope {
       width: 100%;
-      height: 100%;
+      height: 180px;
       background: #5b21b6;
       border-radius: 10px;
-      position: absolute;
-      bottom: 0;
+      position: relative;
       z-index: 1;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.5s;
     }
 
     .envelope.sumir {
@@ -111,59 +85,51 @@
       background: #7c3aed;
       clip-path: polygon(0 0, 50% 50%, 100% 0);
       transform-origin: top;
-      z-index: 2;
     }
 
     .abrir .tampa {
-      animation: abrir 0.8s ease forwards;
+      animation: abrir 0.8s forwards;
     }
 
     @keyframes abrir {
       to { transform: rotateX(180deg); }
     }
 
+    /* CARTA VISUAL */
     .carta {
-      position: absolute;
+      position: relative;
       width: 90%;
-      left: 5%;
-      bottom: 10px;
-      background: #ede9fe;
-      border-radius: 10px;
+      margin: auto;
+      background: #f5f3ff; /* 💜 NOVO FUNDO */
+      border-radius: 12px;
       padding: 15px;
       box-sizing: border-box;
-      transform: translateY(100%);
+      margin-top: -120px;
       z-index: 3;
+
+      /* leve sombra pra destacar */
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
 
-    .abrir .carta {
-      animation: sair 1s ease forwards;
-      animation-delay: 0.8s;
-    }
-
-    @keyframes sair {
-      to { transform: translateY(-120px); }
-    }
-
-    /* TEXTO DIGITANDO */
+    /* TEXTO */
     .texto {
       color: #4c1d95;
       font-size: 14px;
       line-height: 1.6;
       white-space: pre-line;
+      word-wrap: break-word;
     }
 
-    /* cursor piscando */
     .cursor {
       display: inline-block;
       width: 2px;
       background: #4c1d95;
-      margin-left: 2px;
       animation: piscar 1s infinite;
     }
 
     @keyframes piscar {
-      0%, 50%, 100% { opacity: 1; }
-      25%, 75% { opacity: 0; }
+      0%,100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
   </style>
@@ -173,7 +139,7 @@
   <!-- INICIO -->
   <div class="inicio" onclick="abrirCarta()">
     <div class="fala">clica aqui sua sebosa 🙄</div>
-    <img src="axolote.png" alt="Axolote">
+    <img src="axolote.png">
   </div>
 
   <!-- CARTA -->
@@ -207,31 +173,24 @@
     function escreverTexto() {
       const texto = `Feliz aniversário 💜
 
-FELIZZZ ANIVERSÁRIO
+Eu fiz esse site só pra você 😏
+Espero que você goste, mesmo sendo simples
 
-TO NERVOSO N SEI OQ ESCREVER
+Você é muito especial pra mim
+e eu queria fazer algo diferente
 
-parabéns pelos seus 17 anos vei, (não parece q vc tem 17 nunca mas ok) a gente se conhece a muito pouco tempo mesmo ne? Faz nem 1 mes mas tipo, ja te achei MUITO legal de verdade, sei nem como expressar isso mas espero q vc entenda 😭😭
+(apenas o começo…)`;
 
-
-Sei q as coisas ficaram meio esquisitas entre a gente pelo oq aconteceu e tals mas eu realmente n qro parar de conversar ctg, gosto mt de ti, msm q a gente se conheça a pouquinho tempo ja sinto um afeto e consideração gigante por vc, nao sei mt sobre vc, na real n sei quase nada 😿, ja q vc nunca me conta, mas ja to acostumado com seu jeito de sebosa mesmo
-
-Quero q vc saiba o quao difícil pra mim e me aproximar tanto de alguém, e vc meio q conseguiu isso de mim(espero q o site n bugue com pontuações, se tiver bugado eu me mato na sua frente) acho q n sei mt oq mais falar, sendo sincero n sou mt bom com isso e acho q o texto ja ta gigante 😭, qria ter feito algo mais bonitinho pra vc, mas nem merecendo vc ta, e eu tbm ODEIO fazer site, tipo muito mesmo
-
-E isso nay espero q vc aproveite de verdade seu dia, desculpa pelas coisas q aconteceram, meio q eu confundi as coisas e tals mas n qro entrar nesse assunto ja q isso aqui e um negocinho pro seu aniversário, fique bem viu e isso, gosto mt de vc 😿, de verdade 
-
-(Coloquei um botão escondido se quiser procurar boa sorte 😝)`;
-
-      const elemento = document.getElementById("texto");
+      const el = document.getElementById("texto");
       let i = 0;
 
       function digitar() {
         if (i < texto.length) {
-          elemento.innerHTML = texto.substring(0, i + 1) + '<span class="cursor"></span>';
+          el.innerHTML = texto.substring(0, i + 1) + '<span class="cursor"></span>';
           i++;
-          setTimeout(digitar, 35); // velocidade
+          setTimeout(digitar, 35);
         } else {
-          elemento.innerHTML = texto; // remove cursor no final
+          el.innerHTML = texto;
         }
       }
 
