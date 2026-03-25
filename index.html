@@ -16,7 +16,7 @@
       align-items: center;
     }
 
-    /* INICIO */
+    /* ===== INICIO ===== */
     .inicio {
       position: absolute;
       display: flex;
@@ -52,7 +52,7 @@
       box-shadow: 0 0 15px rgba(124,58,237,0.6);
     }
 
-    /* CARTA */
+    /* ===== CARTA ===== */
     .cartaContainer {
       position: absolute;
       width: 300px;
@@ -95,29 +95,24 @@
       to { transform: rotateX(180deg); }
     }
 
-    /* CARTA VISUAL */
     .carta {
       position: relative;
       width: 90%;
       margin: auto;
-      background: #f5f3ff; /* 💜 NOVO FUNDO */
+      background: #f5f3ff;
       border-radius: 12px;
       padding: 15px;
       box-sizing: border-box;
       margin-top: -120px;
       z-index: 3;
-
-      /* leve sombra pra destacar */
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
 
-    /* TEXTO */
     .texto {
       color: #4c1d95;
       font-size: 14px;
       line-height: 1.6;
       white-space: pre-line;
-      word-wrap: break-word;
     }
 
     .cursor {
@@ -130,6 +125,37 @@
     @keyframes piscar {
       0%,100% { opacity: 1; }
       50% { opacity: 0; }
+    }
+
+    /* 🔥 BOTÃO INVISÍVEL */
+    .segredo {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    /* 🔥 TELA SECRETA */
+    .secretoTexto {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #7c3aed;
+      color: #f3e8ff;
+      padding: 20px;
+      border-radius: 20px;
+      font-size: 18px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(124,58,237,0.7);
+      transition: 0.4s;
+      z-index: 999;
+    }
+
+    .secretoTexto.mostrar {
+      transform: translate(-50%, -50%) scale(1);
     }
 
   </style>
@@ -150,7 +176,17 @@
 
     <div class="carta">
       <div class="texto" id="texto"></div>
+
+      <!-- BOTÃO ESCONDIDO -->
+      <div class="segredo" onclick="mostrarSegredo()"></div>
     </div>
+  </div>
+
+  <!-- TEXTO SECRETO -->
+  <div class="secretoTexto" id="segredoTexto">
+    volta a flertar cmg ):
+    (finge q aqui tem a figurinha da formiguinha, deu preguiça de botar,
+    to a 4 horas fazendo isso)
   </div>
 
   <script>
@@ -202,6 +238,10 @@ E isso nay espero q vc aproveite de verdade seu dia, desculpa pelas coisas q aco
       }
 
       digitar();
+    }
+
+    function mostrarSegredo() {
+      document.getElementById("segredoTexto").classList.add("mostrar");
     }
   </script>
 
